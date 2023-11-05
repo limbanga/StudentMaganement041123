@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_student"
+        android:title="Students"
+        android:icon="@drawable/baseline_group_24"/>
+    <item
+        android:id="@+id/item_search"
+        android:title="Search"
+        android:icon="@drawable/baseline_search_24"/>
+    <item
+        android:id="@+id/item_staff"
+        android:title="Staffs"
+        android:icon="@drawable/tie"/>
+    <item
+        android:id="@+id/item_profile"
+        android:title="Profile"
+        android:icon="@drawable/baseline_person_24"/>
+</menu>
