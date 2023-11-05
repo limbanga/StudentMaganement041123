@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.example.studentmanagement041123.adapter.StudentAdapter;
 import com.example.studentmanagement041123.model.Student;
@@ -32,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
                         .build();
 
         studentAdapter = new StudentAdapter(options);
-
         recyclerView.setAdapter(studentAdapter);
     }
 
@@ -46,5 +48,46 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         studentAdapter.stopListening();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem item = menu.findItem(R.id.search);
+
+        SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                textSearch(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                textSearch(s);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void textSearch(String str) {
+
+        FirebaseRecyclerOptions<Student> options =
+                new FirebaseRecyclerOptions.Builder<Student>()
+                        .setQuery(
+                                FirebaseDatabase.getInstance().getReference()
+                                        .child("students")
+                                        .orderByChild("name")
+                                        .startAt(str)
+                                        .endAt(str + "~")
+                                , Student.class)
+                        .build();
+
+        studentAdapter = new StudentAdapter(options);
+        studentAdapter.startListening();
+        recyclerView.setAdapter(studentAdapter);
     }
 }
