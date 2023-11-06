@@ -2,7 +2,9 @@ package com.example.studentmanagement041123;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,11 +29,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.ktx.Firebase;
 
 public class MainActivity extends AppCompatActivity {
-
-//    FloatingActionButton floatingActionButton;
-//    FloatingActionButton logoutButton;
     ViewPager2 viewPager;
     BottomNavigationView bottomNavigationView;
+
+    Toolbar toolbar;
 
     FirebaseAuth mAuth;
     @Override
@@ -41,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-//        floatingActionButton = findViewById(R.id.floatingActionButton);
-//        logoutButton = findViewById(R.id.logout_button);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(this);
         viewPager.setAdapter(adapter);
 
+        // Xử lý sự kiện vuốt để chuyển trang
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -57,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         bottomNavigationView.getMenu().findItem(R.id.item_student).setChecked(true);
+                        break;
+                    case 1:
+                        bottomNavigationView.getMenu().findItem(R.id.item_search).setChecked(true);
+                        break;
+                    case 2:
+                        bottomNavigationView.getMenu().findItem(R.id.item_staff).setChecked(true);
                         break;
                     case 3:
                         bottomNavigationView.getMenu().findItem(R.id.item_profile).setChecked(true);
@@ -73,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_student:
                         viewPager.setCurrentItem(0);
                         break;
+                    case R.id.item_search:
+                        viewPager.setCurrentItem(1);
+                        break;
+                    case R.id.item_staff:
+                        viewPager.setCurrentItem(2);
+                        break;
                     case R.id.item_profile:
                         viewPager.setCurrentItem(3);
                         break;
@@ -81,24 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        logoutButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FirebaseAuth.getInstance().signOut();
-//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
     }
 
     @Override
@@ -129,26 +124,26 @@ public class MainActivity extends AppCompatActivity {
 //        studentAdapter.stopListening();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search, menu);
-        MenuItem item = menu.findItem(R.id.search);
-
-        SearchView searchView = (SearchView) item.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-//                textSearch(s);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-//                textSearch(s);
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.search, menu);
+//        MenuItem item = menu.findItem(R.id.search);
+//
+//        SearchView searchView = (SearchView) item.getActionView();
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+////                textSearch(s);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+////                textSearch(s);
+//                return false;
+//            }
+//        });
+//        return super.onCreateOptionsMenu(menu);
+//    }
 }

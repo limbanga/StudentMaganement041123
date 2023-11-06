@@ -12,14 +12,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.ktx.Firebase;
 
-public class SignUpActivity extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
 
+public class CreateStaffActivity extends AppCompatActivity {
+
+    EditText nameEditText;
+    EditText ageEditText;
     EditText emailEditText;
     EditText passwordEditText;
 
@@ -30,8 +36,10 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_create_staff);
 
+        nameEditText = findViewById(R.id.add_staff_name_edit_text_name);
+        ageEditText = findViewById(R.id.add_staff_age_edit_text);
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
         createAccountButton = findViewById(R.id.create_account);
@@ -45,14 +53,14 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
 
                 if (TextUtils.isEmpty(email.trim())) {
-                    Toast.makeText(SignUpActivity.this,
+                    Toast.makeText(CreateStaffActivity.this,
                             "Email is empty.",
                             Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (password.trim().length() < 6) {
-                    Toast.makeText(SignUpActivity.this,
+                    Toast.makeText(CreateStaffActivity.this,
                             "Password at least 6 characters.",
                             Toast.LENGTH_LONG).show();
                     return;
@@ -64,13 +72,15 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(SignUpActivity.this,
+                                Toast.makeText(CreateStaffActivity.this,
                                         "Account created.",
                                         Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+
+                                addStaffToFireBase();
+                                Intent intent = new Intent(CreateStaffActivity.this, MainActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(SignUpActivity.this,
+                                Toast.makeText(CreateStaffActivity.this,
                                         "Create account failed.",
                                         Toast.LENGTH_SHORT).show();
                             }
@@ -80,5 +90,36 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    private boolean addStaffToFireBase() {
+        final boolean[] isSuccess = {false};
+        Map<String, Object> map = new HashMap<String, Object>();
 
+        map.put("email", emailEditText.getText().toString());
+        map.put("name", nameEditText.getText().toString());
+        map.put("age", Integer.parseInt(ageEditText.getText().toString()));
+
+        FirebaseDatabase.getInstance().getReference()
+                .child("appUsers")
+                .push()
+                .setValue(map)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(CreateStaffActivity.this,
+                                "Add new student successfully.",
+                                Toast.LENGTH_LONG).show();
+                        isSuccess[0] = true;
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CreateStaffActivity.this,
+                                "Something went wrong.",
+                                Toast.LENGTH_LONG).show();
+                        isSuccess[0] = false;
+                    }
+                });
+        return  isSuccess[0];
+    }
 }

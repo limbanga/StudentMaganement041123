@@ -1,11 +1,11 @@
 package com.example.studentmanagement041123.model;
 
-public class Student extends Person {
+public class Staff extends Person {
 
-    public Student() {
+    public Staff() {
     }
 
-    public Student(String name, Integer age) {
+    public Staff(String name, Integer age) {
         this.name = name;
         this.age = age;
     }

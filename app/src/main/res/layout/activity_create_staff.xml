@@ -6,15 +6,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".SignUpActivity">
+    android:layout_margin="20dp"
+    tools:context=".CreateStaffActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create user"
+        android:text="Create staff"
         android:textSize="24sp"
         android:gravity="center"
         android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/add_staff_name_edit_text_name"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:background="@drawable/outline_focus_edit_text" />
+
+
+    <EditText
+        android:id="@+id/add_staff_age_edit_text"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Age"
+        android:inputType="number"
+        android:padding="10dp"
+        android:background="@drawable/outline_focus_edit_text" />
 
     <EditText
         android:id="@+id/email"
@@ -41,7 +63,6 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create"
-        android:backgroundTint="@color/primary"/>
+        android:text="Create" />
 
 </LinearLayout>

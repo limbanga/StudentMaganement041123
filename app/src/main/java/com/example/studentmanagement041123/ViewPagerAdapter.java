@@ -17,8 +17,10 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 1:
-                return null;
+            case 2:
+                return new StaffFragment();
+            case 3:
+                return new ProfileFragment();
             default:
                 return new StudentFragment();
         }

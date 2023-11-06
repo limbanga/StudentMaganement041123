@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         createAccountTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this, CreateStaffActivity.class);
                 startActivity(intent);
             }
         });
@@ -54,6 +56,20 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(LoginActivity.this,
+                            "Email is empty.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(password)) {
+                    Toast.makeText(LoginActivity.this,
+                            "Password is empty.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
@@ -67,9 +83,22 @@ public class LoginActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
-                            } else {
+                            }
+                            else if (task.getException() instanceof FirebaseAuthInvalidUserException) {
+                                // Người dùng không tồn tại
                                 Toast.makeText(LoginActivity.this,
-                                        "Login failed.",
+                                        "Người dùng không tồn tại.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                // Sai mật khẩu
+                                Toast.makeText(LoginActivity.this,
+                                        "Sai mật khẩu, vui lòng thử lại.",
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Xử lý các lỗi khác
+                                Toast.makeText(LoginActivity.this,
+                                        "Đăng nhập thất bại, vui lòng thử lại sau.",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
