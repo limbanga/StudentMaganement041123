@@ -1,6 +1,5 @@
-package com.example.studentmanagement041123;
+package com.example.studentmanagement041123.fragment;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,19 +7,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.studentmanagement041123.R;
+import com.example.studentmanagement041123.activity.CreateStaffActivity;
 import com.example.studentmanagement041123.adapter.StaffAdapter;
 import com.example.studentmanagement041123.model.Staff;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
-import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.ViewHolder;
 
 public class StaffFragment extends Fragment {
 

@@ -1,35 +1,24 @@
 package com.example.studentmanagement041123.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.studentmanagement041123.MainActivity;
+import com.bumptech.glide.Glide;
 import com.example.studentmanagement041123.R;
-import com.example.studentmanagement041123.StudentDetailActivity;
+import com.example.studentmanagement041123.activity.StudentDetailActivity;
 import com.example.studentmanagement041123.model.Student;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.FirebaseDatabase;
-import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.ViewHolder;
 
-import java.util.HashMap;
-import java.util.Map;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StudentAdapter extends FirebaseRecyclerAdapter<Student, StudentAdapter.ViewHolder> {
 
@@ -37,6 +26,7 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<Student, StudentAdap
         TextView nameTextView;
         TextView ageTextView;
         CardView cardView;
+        CircleImageView circleImageView;
 //        Button edit;
 //        Button delete;
 
@@ -46,6 +36,8 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<Student, StudentAdap
             nameTextView = itemView.findViewById(R.id.name);
             ageTextView = itemView.findViewById(R.id.age);
             cardView = itemView.findViewById(R.id.item_student_recycle_view);
+            circleImageView = itemView.findViewById(R.id.image);
+
 //            edit = itemView.findViewById(R.id.edit);
 //            delete = itemView.findViewById(R.id.delete);
         }
@@ -67,6 +59,13 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<Student, StudentAdap
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Student model) {
         holder.nameTextView.setText(model.getName());
         holder.ageTextView.setText(model.getAge().toString());
+
+        Glide.with(holder.nameTextView.getContext())
+                .load("https://firebasestorage.googleapis.com" +
+                        "/v0/b/studentmanagement041123.appspot.com/o/images%2F" +
+                        model.getImage() +
+                        "?alt=media")
+                .into(holder.circleImageView);
 
 //        holder.edit.setOnClickListener(new View.OnClickListener() {
 //            @Override

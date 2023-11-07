@@ -1,4 +1,4 @@
-package com.example.studentmanagement041123;
+package com.example.studentmanagement041123.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,13 +8,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.example.studentmanagement041123.fragment.BottomDialogFragment;
+import com.example.studentmanagement041123.fragment.ProfileFragment;
+import com.example.studentmanagement041123.R;
+import com.example.studentmanagement041123.fragment.StaffFragment;
+import com.example.studentmanagement041123.fragment.StudentFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

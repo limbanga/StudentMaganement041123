@@ -1,4 +1,4 @@
-package com.example.studentmanagement041123;
+package com.example.studentmanagement041123.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.studentmanagement041123.R;
 import com.example.studentmanagement041123.adapter.StudentAdapter;
 import com.example.studentmanagement041123.model.Student;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 public class StudentFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    ImageView addStudentImageView;
-
     StudentAdapter studentAdapter;
 
     @Override
@@ -52,15 +53,7 @@ public class StudentFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.student_recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        addStudentImageView = view.findViewById(R.id.open_add_student_button);
 
-        addStudentImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), CreateStudentActivity.class);
-                startActivity(intent);
-            }
-        });
 
         return view;
     }
@@ -82,6 +75,7 @@ public class StudentFragment extends Fragment {
 //        studentAdapter.startListening();
 //        recyclerView.setAdapter(studentAdapter);
 //    }
+
     private void connectAndListen() {
 
         FirebaseRecyclerOptions<Student> options =

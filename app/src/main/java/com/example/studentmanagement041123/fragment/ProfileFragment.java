@@ -1,4 +1,4 @@
-package com.example.studentmanagement041123;
+package com.example.studentmanagement041123.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
+import com.example.studentmanagement041123.R;
+import com.example.studentmanagement041123.activity.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
