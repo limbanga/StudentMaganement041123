@@ -1,5 +1,6 @@
 package com.example.studentmanagement041123.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -31,8 +32,6 @@ public class StaffAdapter extends FirebaseRecyclerAdapter<Staff, StaffAdapter.Vi
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView ageTextView;
-        Button edit;
-        Button delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -40,8 +39,6 @@ public class StaffAdapter extends FirebaseRecyclerAdapter<Staff, StaffAdapter.Vi
             nameTextView = itemView.findViewById(R.id.name);
             ageTextView = itemView.findViewById(R.id.age);
 
-            edit = itemView.findViewById(R.id.edit);
-            delete = itemView.findViewById(R.id.delete);
         }
     }
 
@@ -57,87 +54,87 @@ public class StaffAdapter extends FirebaseRecyclerAdapter<Staff, StaffAdapter.Vi
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, final int position, @NonNull Staff model) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull Staff model) {
         holder.nameTextView.setText(model.getName());
         holder.ageTextView.setText(model.getAge().toString());
 
-        holder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final DialogPlus dialogPlus = DialogPlus.newDialog(holder.ageTextView.getContext())
-                        .setContentHolder(new com.orhanobut.dialogplus.ViewHolder(R.layout.update_popup))
-                        .setExpanded(true)
-                        .create();
-
-                View v = dialogPlus.getHolderView();
-                EditText name = v.findViewById(R.id.name);
-                EditText age = v.findViewById(R.id.age);
-                Button update = v.findViewById(R.id.update);
-
-                name.setText(model.getName());
-                age.setText(model.getAge().toString());
-
-                update.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Map<String, Object> map = new HashMap<String, Object>();
-
-                        map.put("name", name.getText().toString());
-                        map.put("age", Integer.valueOf(age.getText().toString()));
-
-                        FirebaseDatabase.getInstance().getReference().child("students")
-                                .child(getRef(position).getKey()).updateChildren(map)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(holder.nameTextView.getContext(),
-                                                "Update student successfully.",
-                                                Toast.LENGTH_LONG).show();
-                                        dialogPlus.dismiss();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(holder.nameTextView.getContext(),
-                                                "Something went wrong.",
-                                                Toast.LENGTH_LONG).show();
-                                        dialogPlus.dismiss();
-                                    }
-                                });
-                    }
-                });
-
-                dialogPlus.show();
-            }
-        });
-
-        holder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(holder.nameTextView.getContext());
-                builder.setTitle("Confirm delete.");
-                builder.setMessage("Are you sure to delete this student? This action can't undo.");
-
-                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("students")
-                                    .child(getRef(position).getKey()).removeValue();
-                    }
-                });
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(holder.nameTextView.getContext(),
-                                "Canceled delete.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                builder.show();
-            }
-        });
+//        holder.edit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final DialogPlus dialogPlus = DialogPlus.newDialog(holder.ageTextView.getContext())
+//                        .setContentHolder(new com.orhanobut.dialogplus.ViewHolder(R.layout.update_popup))
+//                        .setExpanded(true)
+//                        .create();
+//
+//                View v = dialogPlus.getHolderView();
+//                EditText name = v.findViewById(R.id.name);
+//                EditText age = v.findViewById(R.id.age);
+//                Button update = v.findViewById(R.id.update);
+//
+//                name.setText(model.getName());
+//                age.setText(model.getAge().toString());
+//
+//                update.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Map<String, Object> map = new HashMap<String, Object>();
+//
+//                        map.put("name", name.getText().toString());
+//                        map.put("age", Integer.valueOf(age.getText().toString()));
+//
+//                        FirebaseDatabase.getInstance().getReference().child("students")
+//                                .child(getRef(position).getKey()).updateChildren(map)
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void unused) {
+//                                        Toast.makeText(holder.nameTextView.getContext(),
+//                                                "Update student successfully.",
+//                                                Toast.LENGTH_LONG).show();
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        Toast.makeText(holder.nameTextView.getContext(),
+//                                                "Something went wrong.",
+//                                                Toast.LENGTH_LONG).show();
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                });
+//                    }
+//                });
+//
+//                dialogPlus.show();
+//            }
+//        });
+//
+//        holder.delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(holder.nameTextView.getContext());
+//                builder.setTitle("Confirm delete.");
+//                builder.setMessage("Are you sure to delete this student? This action can't undo.");
+//
+//                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        FirebaseDatabase.getInstance().getReference().child("students")
+//                                    .child(getRef(position).getKey()).removeValue();
+//                    }
+//                });
+//
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Toast.makeText(holder.nameTextView.getContext(),
+//                                "Canceled delete.",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//                builder.show();
+//            }
+//        });
     }
 }

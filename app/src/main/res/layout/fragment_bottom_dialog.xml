@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".BottomDialogFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="32sp"
+            android:textColor="@color/primary"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Choose" />
+
+
+        <TextView
+            android:id="@+id/open_add_student_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add student"
+            android:paddingStart="20dp"
+            android:textSize="32sp"
+            android:textColor="@color/black"/>
+
+
+        <TextView
+            android:id="@+id/open_add_staff_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add staff"
+            android:paddingStart="20dp"
+            android:textSize="32sp"
+            android:textColor="@color/black"/>
+
+
+    </LinearLayout>
+
+</FrameLayout>

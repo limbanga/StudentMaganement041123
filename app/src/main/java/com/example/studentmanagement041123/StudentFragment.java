@@ -1,6 +1,5 @@
 package com.example.studentmanagement041123;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -29,7 +28,13 @@ public class StudentFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        studentAdapter.startListening();
+        connectAndListen();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        connectAndListen();
     }
 
     @Override
@@ -52,18 +57,11 @@ public class StudentFragment extends Fragment {
         addStudentImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), AddActivity.class);
+                Intent intent = new Intent(getContext(), CreateStudentActivity.class);
                 startActivity(intent);
             }
         });
 
-        FirebaseRecyclerOptions<Student> options =
-                new FirebaseRecyclerOptions.Builder<Student>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("students"), Student.class)
-                        .build();
-
-        studentAdapter = new StudentAdapter(options);
-        recyclerView.setAdapter(studentAdapter);
         return view;
     }
 
@@ -84,5 +82,15 @@ public class StudentFragment extends Fragment {
 //        studentAdapter.startListening();
 //        recyclerView.setAdapter(studentAdapter);
 //    }
+    private void connectAndListen() {
 
+        FirebaseRecyclerOptions<Student> options =
+                new FirebaseRecyclerOptions.Builder<Student>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("students"), Student.class)
+                        .build();
+
+        studentAdapter = new StudentAdapter(options);
+        recyclerView.setAdapter(studentAdapter);
+        studentAdapter.startListening();
+    }
 }

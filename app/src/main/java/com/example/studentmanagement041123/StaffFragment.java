@@ -32,7 +32,13 @@ public class StaffFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        staffAdapter.startListening();
+        getDataAndListen();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataAndListen();
     }
 
     @Override
@@ -54,10 +60,16 @@ public class StaffFragment extends Fragment {
         openAddStaffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), CreateStaffActivity.class);
+                startActivity(intent);
             }
         });
 
+
+        return view;
+    }
+
+    private void getDataAndListen() {
         FirebaseRecyclerOptions<Staff> options =
                 new FirebaseRecyclerOptions.Builder<Staff>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("appUsers"), Staff.class)
@@ -65,7 +77,6 @@ public class StaffFragment extends Fragment {
 
         staffAdapter = new StaffAdapter(options);
         recyclerView.setAdapter(staffAdapter);
-
-        return view;
+        staffAdapter.startListening();
     }
 }

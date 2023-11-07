@@ -1,38 +1,31 @@
 package com.example.studentmanagement041123;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
-import com.example.studentmanagement041123.adapter.StudentAdapter;
-import com.example.studentmanagement041123.model.Student;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.ktx.Firebase;
 
 public class MainActivity extends AppCompatActivity {
-    ViewPager2 viewPager;
+    FrameLayout frameLayout;
     BottomNavigationView bottomNavigationView;
-
-    Toolbar toolbar;
+    FloatingActionButton addButton;
 
     FirebaseAuth mAuth;
     @Override
@@ -40,60 +33,51 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewPager = findViewById(R.id.view_pager);
+        frameLayout = findViewById(R.id.frame_layout);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-
 
         mAuth = FirebaseAuth.getInstance();
 
+        replaceFragment(new StudentFragment());
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
-        viewPager.setAdapter(adapter);
-
-        // Xử lý sự kiện vuốt để chuyển trang
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                switch (position) {
-                    case 0:
-                        bottomNavigationView.getMenu().findItem(R.id.item_student).setChecked(true);
-                        break;
-                    case 1:
-                        bottomNavigationView.getMenu().findItem(R.id.item_search).setChecked(true);
-                        break;
-                    case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.item_staff).setChecked(true);
-                        break;
-                    case 3:
-                        bottomNavigationView.getMenu().findItem(R.id.item_profile).setChecked(true);
-                    default:
-                        break;
-                }
-            }
-        });
-
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_student:
-                        viewPager.setCurrentItem(0);
+                        replaceFragment(new StudentFragment());
                         break;
                     case R.id.item_search:
-                        viewPager.setCurrentItem(1);
+                        Toast.makeText(MainActivity.this, "Chua lam search", Toast.LENGTH_LONG).show();
                         break;
+                    case  R.id.item_add:
+                        Toast.makeText(MainActivity.this, "Chua lam add", Toast.LENGTH_LONG).show();
+                        openDialog();
+                        return false;
                     case R.id.item_staff:
-                        viewPager.setCurrentItem(2);
+                        replaceFragment(new StaffFragment());
                         break;
                     case R.id.item_profile:
-                        viewPager.setCurrentItem(3);
+                        replaceFragment(new ProfileFragment());
                         break;
                     default:
                         break;
                 }
+                return true;
             }
         });
+    }
+
+    private void openDialog() {
+        BottomSheetDialogFragment dialogFragment = new BottomDialogFragment();
+        dialogFragment.show(getSupportFragmentManager(), "dialog add");
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -106,44 +90,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return;
         }
-
-//        FirebaseRecyclerOptions<Student> options =
-//                new FirebaseRecyclerOptions.Builder<Student>()
-//                        .setQuery(FirebaseDatabase.getInstance().getReference().child("students"), Student.class)
-//                        .build();
-
-//        studentAdapter = new StudentAdapter(options);
-//        recyclerView.setAdapter(studentAdapter);
-//
-//        studentAdapter.startListening();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-//        studentAdapter.stopListening();
-    }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.search, menu);
-//        MenuItem item = menu.findItem(R.id.search);
-//
-//        SearchView searchView = (SearchView) item.getActionView();
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-////                textSearch(s);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-////                textSearch(s);
-//                return false;
-//            }
-//        });
-//        return super.onCreateOptionsMenu(menu);
-//    }
 }

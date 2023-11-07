@@ -2,14 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="20dp">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/create_student_circle_image_view"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center"
+        app:civ_border_color="@color/primary"
+        app:civ_border_width="2dp"/>
+
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add student"
-        android:textSize="24sp"
+        android:textSize="32sp"
         android:gravity="center"
         android:textColor="@color/black"/>
 

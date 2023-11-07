@@ -9,6 +9,12 @@
         android:title="Search"
         android:icon="@drawable/baseline_search_24"/>
     <item
+        android:id="@+id/item_add"
+        android:enabled="true"
+        android:title="Add"
+        android:checkable="false"
+        android:icon="@drawable/baseline_add_24"/>
+    <item
         android:id="@+id/item_staff"
         android:title="Staffs"
         android:icon="@drawable/tie"/>

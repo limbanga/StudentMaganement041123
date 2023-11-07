@@ -12,6 +12,34 @@
         android:textSize="24sp"
         android:gravity="center"
         android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textColor="@color/black"/>
 
     <EditText
         android:id="@+id/name"
