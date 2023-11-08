@@ -27,8 +27,6 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<Student, StudentAdap
         TextView ageTextView;
         CardView cardView;
         CircleImageView circleImageView;
-//        Button edit;
-//        Button delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -38,8 +36,6 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<Student, StudentAdap
             cardView = itemView.findViewById(R.id.item_student_recycle_view);
             circleImageView = itemView.findViewById(R.id.image);
 
-//            edit = itemView.findViewById(R.id.edit);
-//            delete = itemView.findViewById(R.id.delete);
         }
     }
 
@@ -63,59 +59,6 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<Student, StudentAdap
         Glide.with(holder.nameTextView.getContext())
                 .load(model.getImageUrl())
                 .into(holder.circleImageView);
-
-//        holder.edit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final DialogPlus dialogPlus = DialogPlus.newDialog(holder.ageTextView.getContext())
-//                        .setContentHolder(new com.orhanobut.dialogplus.ViewHolder(R.layout.update_popup))
-//                        .setExpanded(true)
-//                        .create();
-//
-//                View v = dialogPlus.getHolderView();
-//                EditText name = v.findViewById(R.id.name);
-//                EditText age = v.findViewById(R.id.age);
-//                Button update = v.findViewById(R.id.update);
-//
-//                name.setText(model.getName());
-//                age.setText(model.getAge().toString());
-//
-//                update.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Map<String, Object> map = new HashMap<String, Object>();
-//
-//                        map.put("name", name.getText().toString());
-//                        map.put("age", Integer.valueOf(age.getText().toString()));
-//
-//                        FirebaseDatabase.getInstance().getReference().child("students")
-//                                .child(getRef(position).getKey()).updateChildren(map)
-//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                    @Override
-//                                    public void onSuccess(Void unused) {
-//                                        Toast.makeText(holder.nameTextView.getContext(),
-//                                                "Update student successfully.",
-//                                                Toast.LENGTH_LONG).show();
-//                                        dialogPlus.dismiss();
-//                                    }
-//                                })
-//                                .addOnFailureListener(new OnFailureListener() {
-//                                    @Override
-//                                    public void onFailure(@NonNull Exception e) {
-//                                        Toast.makeText(holder.nameTextView.getContext(),
-//                                                "Something went wrong   .",
-//                                                Toast.LENGTH_LONG).show();
-//                                        dialogPlus.dismiss();
-//                                    }
-//                                });
-//                    }
-//                });
-//
-//                dialogPlus.show();
-//            }
-//        });
-//
-
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

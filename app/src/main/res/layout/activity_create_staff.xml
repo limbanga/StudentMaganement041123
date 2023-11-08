@@ -9,13 +9,23 @@
     android:layout_margin="20dp"
     tools:context=".activity.CreateStaffActivity">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/create_staff_image_view"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:src="@drawable/baseline_person_24"
+        app:civ_border_color="@color/primary"
+        app:civ_border_width="2dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Create staff"
-        android:textSize="24sp"
+        android:textSize="32sp"
         android:gravity="center"
-        android:textColor="@color/black"/>
+        android:textColor="@color/primary"/>
 
     <EditText
         android:id="@+id/add_staff_name_edit_text_name"
@@ -25,7 +35,7 @@
         android:hint="Name"
         android:inputType="textPersonName"
         android:padding="10dp"
-        android:background="@drawable/outline_focus_edit_text" />
+        android:background="@drawable/outline_edit_text" />
 
 
     <EditText
@@ -36,7 +46,7 @@
         android:hint="Age"
         android:inputType="number"
         android:padding="10dp"
-        android:background="@drawable/outline_focus_edit_text" />
+        android:background="@drawable/outline_edit_text" />
 
     <EditText
         android:id="@+id/email"
@@ -46,7 +56,7 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-        android:background="@drawable/outline_focus_edit_text" />
+        android:background="@drawable/outline_edit_text" />
 
     <EditText
         android:id="@+id/password"
@@ -56,7 +66,7 @@
         android:hint="Password"
         android:padding="10dp"
         android:inputType="textPassword"
-        android:background="@drawable/outline_focus_edit_text" />
+        android:background="@drawable/outline_edit_text" />
 
     <Button
         android:id="@+id/create_account"

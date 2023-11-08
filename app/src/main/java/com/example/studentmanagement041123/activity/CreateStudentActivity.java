@@ -125,7 +125,6 @@ public class CreateStudentActivity extends AppCompatActivity {
         fileName = "";
         if (imageUrl != null) {
             fileName = StringHelper.generateGuidFileNameWithExtension(imageUrl, this);
-
         }
 
         map.put("name", name.getText().toString());

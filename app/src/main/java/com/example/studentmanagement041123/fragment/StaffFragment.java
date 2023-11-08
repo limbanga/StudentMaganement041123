@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class StaffFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private FloatingActionButton openAddStaffButton;
 
     StaffAdapter staffAdapter;
 
@@ -52,15 +51,6 @@ public class StaffFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.staff_recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        openAddStaffButton = view.findViewById(R.id.open_add_staff_button);
-        openAddStaffButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CreateStaffActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
         return view;

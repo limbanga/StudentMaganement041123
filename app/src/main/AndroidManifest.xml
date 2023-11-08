@@ -23,6 +23,12 @@
             android:name=".activity.CreateStaffActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.UpdateStaffActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.StaffDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity

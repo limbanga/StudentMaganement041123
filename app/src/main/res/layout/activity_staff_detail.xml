@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".activity.StudentDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right">
+
+        <ImageView
+            android:id="@+id/open_update_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/baseline_edit_24" />
+
+        <ImageView
+            android:id="@+id/delete_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/baseline_delete_24" />
+
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/student_detail_image_view"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/primary"/>
+
+    <TextView
+        android:id="@+id/student_detail_name_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="student name"
+        android:textSize="32sp"
+        android:textColor="@color/primary"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/student_detail_age_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="age"
+        android:textSize="32sp"
+        android:textColor="@color/primary"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>
