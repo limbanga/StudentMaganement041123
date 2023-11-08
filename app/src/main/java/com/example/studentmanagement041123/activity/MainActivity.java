@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Chua lam search", Toast.LENGTH_LONG).show();
                         break;
                     case  R.id.item_add:
-                        Toast.makeText(MainActivity.this, "Chua lam add", Toast.LENGTH_LONG).show();
                         openDialog();
                         return false;
                     case R.id.item_staff:

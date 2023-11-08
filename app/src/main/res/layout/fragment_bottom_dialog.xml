@@ -11,6 +11,7 @@
         android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,13 +23,17 @@
             android:text="Choose" />
 
 
+
         <TextView
             android:id="@+id/open_add_student_button"
+            android:drawableStart="@drawable/baseline_group_24"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
             android:text="Add student"
             android:paddingStart="20dp"
-            android:textSize="32sp"
+            android:paddingVertical="10dp"
+            android:textSize="24sp"
             android:textColor="@color/black"/>
 
 
@@ -38,9 +43,11 @@
             android:layout_height="wrap_content"
             android:text="Add staff"
             android:paddingStart="20dp"
-            android:textSize="32sp"
+            android:drawableStart="@drawable/tie"
+            android:drawablePadding="10dp"
+            android:paddingVertical="10dp"
+            android:textSize="24sp"
             android:textColor="@color/black"/>
-
 
     </LinearLayout>
 

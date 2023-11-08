@@ -84,19 +84,19 @@ public class CreateStudentActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference("images/"+newFileName);
 
         storageReference.putFile(imageUrl)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(CreateStudentActivity.this,
-                                "Upload image success.", Toast.LENGTH_LONG).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CreateStudentActivity.this,
-                                "Upload image failed.", Toast.LENGTH_LONG).show();
-                    }
-                });
+            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(CreateStudentActivity.this,
+                            "Upload image success.", Toast.LENGTH_LONG).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(CreateStudentActivity.this,
+                            "Upload image failed.", Toast.LENGTH_LONG).show();
+                }
+            });
     }
 
 
@@ -121,7 +121,12 @@ public class CreateStudentActivity extends AppCompatActivity {
 
     private void createStudent() {
         Map<String, Object> map = new HashMap<String, Object>();
-        fileName = StringHelper.generateGuidFileNameWithExtension(imageUrl, this);
+
+        fileName = "";
+        if (imageUrl != null) {
+            fileName = StringHelper.generateGuidFileNameWithExtension(imageUrl, this);
+
+        }
 
         map.put("name", name.getText().toString());
         map.put("age", Integer.parseInt(age.getText().toString()));

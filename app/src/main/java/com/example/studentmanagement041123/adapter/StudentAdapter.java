@@ -61,10 +61,7 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<Student, StudentAdap
         holder.ageTextView.setText(model.getAge().toString());
 
         Glide.with(holder.nameTextView.getContext())
-                .load("https://firebasestorage.googleapis.com" +
-                        "/v0/b/studentmanagement041123.appspot.com/o/images%2F" +
-                        model.getImage() +
-                        "?alt=media")
+                .load(model.getImageUrl())
                 .into(holder.circleImageView);
 
 //        holder.edit.setOnClickListener(new View.OnClickListener() {
@@ -118,33 +115,7 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<Student, StudentAdap
 //            }
 //        });
 //
-//        holder.delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(holder.nameTextView.getContext());
-//                builder.setTitle("Confirm delete.");
-//                builder.setMessage("Are you sure to delete this student? This action can't undo.");
-//
-//                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        FirebaseDatabase.getInstance().getReference().child("students")
-//                                    .child(getRef(position).getKey()).removeValue();
-//                    }
-//                });
-//
-//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        Toast.makeText(holder.nameTextView.getContext(),
-//                                "Canceled delete.",
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//                builder.show();
-//            }
-//        });
+
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

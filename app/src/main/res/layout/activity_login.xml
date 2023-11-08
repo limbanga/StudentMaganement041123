@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
+        android:textSize="48sp"
         android:text="Login"
         android:textColor="@color/primary"
         android:gravity="center"/>
@@ -41,8 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/primary"/>
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/create_account_text_view"
@@ -50,4 +49,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Sign up"/>
+
 </LinearLayout>

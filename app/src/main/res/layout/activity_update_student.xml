@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="20dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/create_student_circle_image_view"
+        android:id="@+id/update_student_circle_image_view"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/baseline_upload_file_24"
+        android:src="@drawable/baseline_person_24"
         android:layout_gravity="center"
         app:civ_border_color="@color/primary"
         app:civ_border_width="2dp"/>
@@ -19,13 +20,13 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add student"
+        android:text="Update student"
         android:textSize="32sp"
         android:gravity="center"
         android:textColor="@color/black"/>
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/update_student_name_edit_text"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +38,7 @@
         android:background="@drawable/outline_edit_text" />
 
     <EditText
-        android:id="@+id/age"
+        android:id="@+id/update_student_age_edit_text"
         android:layout_marginTop="20dp"
         android:inputType="number"
         android:layout_width="match_parent"
@@ -48,18 +49,10 @@
         android:background="@drawable/outline_edit_text" />
 
     <Button
-        android:id="@+id/add"
+        android:id="@+id/update_student_update_button"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add" />
-
-    <Button
-        android:id="@+id/back"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:backgroundTint="@color/gray"/>
+        android:text="Update" />
 
 </LinearLayout>
