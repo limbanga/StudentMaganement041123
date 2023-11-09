@@ -52,14 +52,14 @@ public class StaffFragment extends Fragment {
         recyclerView = view.findViewById(R.id.staff_recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         return view;
     }
 
     private void getDataAndListen() {
         FirebaseRecyclerOptions<Staff> options =
                 new FirebaseRecyclerOptions.Builder<Staff>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("appUsers"), Staff.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference()
+                                .child("appUsers"), Staff.class)
                         .build();
 
         staffAdapter = new StaffAdapter(options);

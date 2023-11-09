@@ -2,23 +2,27 @@ package com.example.studentmanagement041123.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.studentmanagement041123.R;
+import com.example.studentmanagement041123.adapter.CertificateAdapter;
+import com.example.studentmanagement041123.dialog.CreateCertificateDialog;
 import com.example.studentmanagement041123.dialog.ConfirmDialog;
+import com.example.studentmanagement041123.model.Certificate;
 import com.example.studentmanagement041123.model.Student;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +31,7 @@ public class StudentDetailActivity extends AppCompatActivity {
 
     public static final String STUDENT_ID_KEY_NAME = "STUDENT_ID_KEY_NAME";
     String studentId;
+    CertificateAdapter adapter;
 
     private Student student;
     TextView nameTextView;
@@ -34,6 +39,15 @@ public class StudentDetailActivity extends AppCompatActivity {
     ImageView imageView;
     ImageView openUpdateImageView;
     ImageView deleteImageView;
+
+    ImageView openAddCertificate;
+    RecyclerView recyclerView;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +65,14 @@ public class StudentDetailActivity extends AppCompatActivity {
         imageView = findViewById(R.id.student_detail_image_view);
         openUpdateImageView = findViewById(R.id.open_update_image_view);
         deleteImageView = findViewById(R.id.delete_image_view);
+        recyclerView = findViewById(R.id.certificate_recycle_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(StudentDetailActivity.this));
+        openAddCertificate = findViewById(R.id.add_certificate_image_view);
 
         studentId = intent.getStringExtra(StudentDetailActivity.STUDENT_ID_KEY_NAME);
 
         loadStudentData();
+        connectAndListen();
 
         openUpdateImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +83,7 @@ public class StudentDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         deleteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +96,14 @@ public class StudentDetailActivity extends AppCompatActivity {
                 };
 
                 Dialog dialog = new ConfirmDialog(StudentDetailActivity.this, listener);
+                dialog.show();
+            }
+        });
+
+        openAddCertificate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreateCertificateDialog dialog = new CreateCertificateDialog(StudentDetailActivity.this, studentId);
                 dialog.show();
             }
         });
@@ -130,4 +157,17 @@ public class StudentDetailActivity extends AppCompatActivity {
         });
     }
 
+    private void connectAndListen() {
+        FirebaseRecyclerOptions<Certificate> options =
+                new FirebaseRecyclerOptions.Builder<Certificate>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference()
+                                .child("students")
+                                .child(studentId)
+                                .child("certificates"), Certificate.class)
+                        .build();
+
+        adapter = new CertificateAdapter(options, studentId);
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+    }
 }

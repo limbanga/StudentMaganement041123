@@ -18,7 +18,7 @@ public class ConfirmDialog extends Dialog {
 
     public ConfirmDialog(@NonNull Context context, Listener listener) {
         super(context);
-        this.setContentView(R.layout.dialog_custom);
+        this.setContentView(R.layout.dialog_confirm_delete);
         this.getWindow()
                 .setLayout(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
